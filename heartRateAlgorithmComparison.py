@@ -33,6 +33,12 @@ reference_HR: The reference heart rate, measured in bpm.
 
 Data in the two input files should be parallel.
 
+Two output figures are produced in the current directory:
+BlandAltmanPPG.png: Bland-Altman plot comparing the heart rate
+	estimated using PPG-only to the reference heart rate.
+BlandAltmanPPGArea.png: Bland-Altman plot comparing the heart
+	rate estimated using PPG-area to the reference heart rate.
+
 Run this code using the command:
 python heartRateAlgorithmComparison.py HREstimates.csv reference.csv
 """

@@ -112,6 +112,8 @@ def PlotLassoColorArea(greens, areas, threshold_factor, figname):
             area_B[index:index + 2], 2)
 
     # Bandpass filter the green color and area
+    # For simplicity, filtering is done naively using FFT
+    # and edge effects up to 10 bpm are ignored (below)
     green_fft = np.fft.rfft(green_window)
     green_bandpass_fft = np.copy(green_fft)
     green_bandpass_fft[bpm_window < lower_bpm] = 0
@@ -226,6 +228,8 @@ def PlotFourierColorArea(greens, areas, threshold_factor, figname):
     steps = upper_index - lower_index
 
     # Bandpass filter the green color and area
+    # For simplicity, filtering is done naively using FFT
+    # and edge effects up to 10 bpm are ignored (below)
     green_fft = np.fft.rfft(green_window)
     green_bandpass_fft = np.copy(green_fft)
     green_bandpass_fft[bpm_window < lower_bpm] = 0
@@ -322,7 +326,7 @@ for area_name in area_names:
     area = np.loadtxt(area_name)
     color = np.loadtxt(color_name)
 
-    # Don't process videos that are less than 20 seconds of decent data
+    # Skip videos that are less than 20 seconds of decent data
     if np.size(area) < 20 * frame_rate:
         peaks.append([subject_number, video_number, 0, 0, 0, 0, 0, 0])
         continue
